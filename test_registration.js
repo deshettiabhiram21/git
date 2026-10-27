@@ -1,46 +1,41 @@
-const { Builder, By, until } = require('selenium-webdriver');
+const { Builder, By, until } = require("selenium-webdriver");
 
-async function runTest() {
+async function testRegistration() {
     const driver = await new Builder()
-        .forBrowser('chrome')
+        .forBrowser("chrome")
         .build();
 
     try {
-    
-        await driver.get('http://localhost:3000');
+        await driver.get("http://localhost:8081");
 
-    
-        await driver.findElement(By.id('username'))
-            .sendKeys('testuser');
+        await driver.findElement(By.id("name"))
+            .sendKeys("Abhiram");
 
-    
-        await driver.findElement(By.id('email'))
-            .sendKeys('testuser@example.com');
+        await driver.findElement(By.id("email"))
+            .sendKeys("abhiram@example.com");
 
-        
-        await driver.findElement(By.id('password'))
-            .sendKeys('password123');
-
-        
-        await driver.findElement(By.tagName('button'))
+        await driver.findElement(By.id("submit"))
             .click();
 
-        
         await driver.wait(
-            until.elementLocated(
-                By.xpath("//*[contains(text(), 'Registration successful!')]")
-            ),
-            10000
+            until.elementLocated(By.tagName("body")),
+            5000
         );
 
-        console.log('Test Passed: Registration was successful.');
+        const result = await driver.findElement(By.tagName("body"))
+            .getText();
+
+        if (result.includes("Registration successful!")) {
+            console.log("TEST PASSED:", result);
+        } else {
+            console.log("TEST FAILED:", result);
+        }
 
     } catch (error) {
-        console.log('Test Failed:', error.message);
-
+        console.error("Test error:", error.message);
     } finally {
         await driver.quit();
     }
 }
 
-runTest();
+testRegistration();
