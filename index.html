@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+</head>
+<body>
+
+    <h1>Registration Form</h1>
+
+    <form onsubmit="return Validate()">
+
+        <label>Username:</label>
+        <input type="text" id="username">
+        <br><br>
+
+        <label>Email ID:</label>
+        <input type="text" id="email">
+        <br><br>
+
+        <label>Phone No:</label>
+        <input type="text" id="phone">
+        <br><br>
+
+        <label>Password:</label>
+        <input type="password" id="password">
+        <br><br>
+
+        <button type="submit" id="register">Register</button>
+
+    </form>
+
+    <p id="message"></p>
+
+    <script>
+        function Validate() {
+            let name = document.getElementById('username').value;
+            let email = document.getElementById('email').value;
+            let phone = document.getElementById('phone').value;
+            let password = document.getElementById('password').value;
+
+            if (name == '' || email == '' || phone == '' || password == '') {
+                document.getElementById('message').innerHTML =
+                    'Please fill all the fields';
+            } else {
+                document.getElementById('message').innerHTML =
+                    'Registration Successful!';
+            }
+
+            return false;
+        }
+    </script>
+
+</body>
+</html>

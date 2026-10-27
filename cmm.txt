@@ -1,0 +1,65 @@
+```powershell
+# 1. Build a Docker image from the Dockerfile
+docker build -t nodejs-registration-app .
+
+# 2. Run the Docker container and map port 3000
+docker run -d -p 3000:3000 --name nodejs-registration nodejs-registration-app
+
+# 3. Check running containers
+docker ps
+
+# 4. Check all containers, including stopped containers
+docker ps -a
+
+# 5. Open the registration application in your browser
+# http://localhost:3000
+
+# 6. View application logs
+docker logs nodejs-registration
+
+# 7. Follow application logs continuously (Ctrl+C to stop following)
+docker logs -f nodejs-registration
+
+# 8. Stop the container
+docker stop nodejs-registration
+
+# 9. Start the stopped container
+docker start nodejs-registration
+
+# 10. Restart the container
+docker restart nodejs-registration
+
+# 11. Remove the container (force stops it if running)
+docker rm -f nodejs-registration
+
+# 12. Rebuild the image after changing app.js or Dockerfile
+docker build -t nodejs-registration-app .
+
+# 13. Recreate and start the container after rebuilding
+docker run -d -p 3000:3000 --name nodejs-registration nodejs-registration-app
+
+# 14. List Docker images
+docker images
+
+# 15. Remove the Docker image (only when no container is using it)
+docker rmi nodejs-registration-app
+```
+
+```dockerfile
+FROM python:3.12-slim
+WORKDIR /app
+COPY app.py .
+EXPOSE 8080
+CMD ["python", "app.py"]
+```
+
+
+```dockerfile
+FROM eclipse-temurin:21-jdk
+WORKDIR /app
+COPY App.java .
+RUN javac App.java
+EXPOSE 8080
+CMD ["java", "App"]
+```
+
